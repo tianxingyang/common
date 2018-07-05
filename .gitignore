@@ -1,1 +1,4 @@
 /.vs
+common.sln
+common.vcxproj.filters
+common.vcxproj.user
