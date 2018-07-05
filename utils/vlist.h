@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 
 namespace vcommon
 {
@@ -30,10 +31,6 @@ public:
     bool empty() { return size_ == 0; }
 
 private:
-    void append(VListNode<_Ty> * node, _Ty * data);
-    void prepend(VListNode<_Ty> * node, _Ty * data);
-
-private:
     VListNode<_Ty> * head_;
     VListNode<_Ty> * tail_;
     size_t size_;
@@ -57,49 +54,58 @@ inline vcommon::VList<_Ty>::~VList()
 }
 
 template<typename _Ty>
-inline void vcommon::VList<_Ty>::append(VListNode<_Ty> * node, _Ty * data)
-{
-    VListNode<_Ty> * node_tmp = new VListNode<_Ty>;
-    memcpy(&(node_tmp->data), data, sizeof(_Ty));
-    node->next->prev = node_tmp;
-    node_tmp->next = node->next;
-    node->next = node_tmp;
-    node_tmp->prev = node;
-
-    ++size_;
-}
-
-template<typename _Ty>
-inline void vcommon::VList<_Ty>::prepend(VListNode<_Ty> * node, _Ty * data)
-{
-    VListNode<_Ty> * node_tmp = new VListNode<_Ty>;
-    memcpy(&(node_tmp->data), data, sizeof(_Ty));
-    node->prev->next = node_tmp;
-    node_tmp->prev = node->prev;
-    node->prev = node_tmp;
-    node_tmp->next = node;
-
-    ++size_;
-}
-
-template<typename _Ty>
 inline void vcommon::VList<_Ty>::push_back(_Ty * data)
 {
-    append(tail_, data);
+    VListNode<_Ty> * node_tmp = new VListNode<_Ty>;
+    memcpy(&(node_tmp->data), data, sizeof(_Ty));
+
+    tail_->next = node_tmp;
+    node_tmp->prev = tail_;
+    node_tmp->next = head_;
+
+    tail_ = node_tmp;
+
+    ++size_;
 }
 
 template<typename _Ty>
 inline void vcommon::VList<_Ty>::push_front(_Ty * data)
 {
-    prepend(head_, data);
+    VListNode<_Ty> * node_tmp = new VListNode<_Ty>;
+    memcpy(&(node_tmp->data), data, sizeof(_Ty));
+
+    head_->next->prev = node_tmp;
+    node_tmp->next = head_->next->next;
+    node_tmp->prev = head_;
+    head_->next = node_tmp;
+
+    ++size_;
 }
+
 template<typename _Ty>
 inline void vcommon::VList<_Ty>::pop_back()
 {
+    assert(size_ > 0);
+
+    auto node_to_delete = tail_;
+    tail_ = tail_->prev;
+    delete node_to_delete;
+    node_to_delete = nullptr;
+
+    --size_;
 }
+
 template<typename _Ty>
 inline void vcommon::VList<_Ty>::pop_front()
 {
+    assert(size_ > 0);
+
+    auto node_to_delete = head_->next;
+    head_->next = head_->next->next;
+    delete node_to_delete;
+    node_to_delete = nullptr;
+
+    --size_;
 }
 }
 
