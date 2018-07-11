@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 enable_testing()
 
-set (GTEST_ROOT ${CMAKE_SOURCE_DIR}../libs/googletest)
+set (GTEST_ROOT ${CMAKE_SOURCE_DIR}../libs/google/gtest)
 set(ENV{GTEST_INCLUDE_DIR} ../libs/)
 set(ENV{GTEST_BOTH_LIBRARIES} ../libs/)
 
