@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.0)
+
+enable_testing()
+
+set(ENV{GTEST_INCLUDE_DIR} ../libs/)
+set(ENV{GTEST_BOTH_LIBRARIES} ../libs/)
+
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIR})
+include_directories(../utils/)
+add_executable(vlist_test vlist_test.cpp)
+target_link_libraries(vlist_test ${GTEST_BOTH_LIBRARIES})
+
+add_test(
+        VListTest ConstructorTest
+        VListTest IteratorTest
+)
