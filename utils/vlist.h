@@ -79,12 +79,12 @@ public:
 };
 
 template<typename _Ty>
-inline VList<_Ty>::VList<_Ty>() : head_(new VListNode<_Ty>), tail_(head_), size_(0)
+inline VList<_Ty>::VList() : head_(new VListNode<_Ty>), tail_(head_), size_(0)
 {
 }
 
 template<typename _Ty>
-inline VList<_Ty>::VList<_Ty>(const _Ty & element) : head_(new VListNode<_Ty>), tail_(head_), size_(0)
+inline VList<_Ty>::VList(const _Ty & element) : head_(new VListNode<_Ty>), tail_(head_), size_(0)
 {
     push_back(element);
 }
