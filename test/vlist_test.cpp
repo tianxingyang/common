@@ -1,0 +1,20 @@
+#include <google/gtest/gtest.h>
+
+#include "vlist.h"
+
+using namespace vcommon;
+
+TEST(VListTest, ConstructorTest)
+{
+    VList<int> v_list;
+    VList<int> v_list_1(10);
+    EXPECT_EQ(v_list_1.head_->data, 10);
+    EXPECT_EQ(v_list.head_->next, nullptr);
+}
+
+TEST(VListTest, IteratorTest)
+{
+    VList<int> v_list(10);
+    EXPECT_EQ(*(v_list.begin()), 10);
+    EXPECT_EQ(*(v_list.end()), 10);
+}
