@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakefile.txt" />
+    <Text Include="test\CMakefile.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,25 +21,6 @@ class VList
     friend class VListIterator;
 
 public:
-    VList<_Ty>();
-    explicit VList<_Ty>(const _Ty & element);
-    VList<_Ty>(const VList<_Ty> & rhs);
-    ~VList();
-    VList<_Ty> & operator=(const VList<_Ty> & rhs);
-
-public:
-    VListIterator & begin();
-    VListIterator & end();
-
-public:
-    void push_back(const _Ty& data);
-    void push_front(const _Ty& data);
-    void pop_back() noexcept(false);
-    void pop_front() noexcept(false);
-    void clear();
-    bool empty() { return size_ == 0; }
-
-public:
     class VListIterator
     {
         friend class VList<_Ty>;
@@ -70,6 +51,25 @@ public:
     private:
         VListNode<_Ty> * iter_;
     };
+
+public:
+    VList<_Ty>();
+    explicit VList<_Ty>(const _Ty & element);
+    VList<_Ty>(const VList<_Ty> & rhs);
+    ~VList();
+    VList<_Ty> & operator=(const VList<_Ty> & rhs);
+
+public:
+    VListIterator & begin();
+    VListIterator & end();
+
+public:
+    void push_back(const _Ty& data);
+    void push_front(const _Ty& data);
+    void pop_back() noexcept(false);
+    void pop_front() noexcept(false);
+    void clear();
+    bool empty() { return size_ == 0; }
 
     // TODO ≤‚ ‘¥˙¬Î
 public:
