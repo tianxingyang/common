@@ -89,8 +89,8 @@ public:
     VList<_Ty> & operator=(const VList<_Ty> & rhs);
 
 public:
-    VListIterator & begin();
-    VListIterator & end();
+    VListIterator begin();
+    VListIterator end();
 
 public:
     void push_back(const _Ty& data);
@@ -148,13 +148,13 @@ inline VList<_Ty>& VList<_Ty>::operator=(const VList<_Ty>& rhs)
 }
 
 template<typename _Ty>
-inline typename VList<_Ty>::VListIterator& VList<_Ty>::begin()
+inline typename VList<_Ty>::VListIterator VList<_Ty>::begin()
 {
     return VListIterator(head_->next_);
 }
 
 template<typename _Ty>
-inline typename VList<_Ty>::VListIterator & VList<_Ty>::end()
+inline typename VList<_Ty>::VListIterator VList<_Ty>::end()
 {
     return VListIterator(tail_);
 }
