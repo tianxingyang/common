@@ -78,6 +78,9 @@ public:
         explicit VListIterator(VListNode * node) : VConstListIterator(node) {}
     };
 
+    friend class VConstListIterator;
+    friend class VListIterator;
+
 public:
     VList<_Ty>();
     explicit VList<_Ty>(const _Ty & element);
@@ -147,7 +150,7 @@ inline VList<_Ty>& VList<_Ty>::operator=(const VList<_Ty>& rhs)
 template<typename _Ty>
 inline typename VList<_Ty>::VListIterator& VList<_Ty>::begin()
 {
-    return VListIterator(head_);
+    return VListIterator(head_->next_);
 }
 
 template<typename _Ty>
