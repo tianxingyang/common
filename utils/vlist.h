@@ -158,11 +158,11 @@ template<typename _Ty>
 inline void VList<_Ty>::push_back(const _Ty& data)
 {
     VListNode * node_tmp = new VListNode;
-    memcpy(&(node_tmp->data), &data, sizeof(_Ty));
+    memcpy(&(node_tmp->data_), &data, sizeof(_Ty));
 
-    tail_->next = node_tmp;
-    node_tmp->prev = tail_;
-    node_tmp->next = head_;
+    tail_->next_ = node_tmp;
+    node_tmp->prev_ = tail_;
+    node_tmp->next_ = head_;
 
     tail_ = node_tmp;
 
@@ -173,12 +173,12 @@ template<typename _Ty>
 inline void VList<_Ty>::push_front(const _Ty& data)
 {
     VListNode * node_tmp = new VListNode;
-    memcpy(&(node_tmp->data), &data, sizeof(_Ty));
+    memcpy(&(node_tmp->data_), &data, sizeof(_Ty));
 
-    head_->next->prev = node_tmp;
-    node_tmp->next = head_->next->next;
-    node_tmp->prev = head_;
-    head_->next = node_tmp;
+    head_->next_->prev_ = node_tmp;
+    node_tmp->next_ = head_->next_->next_;
+    node_tmp->prev_ = head_;
+    head_->next_ = node_tmp;
 
     ++size_;
 }
@@ -192,7 +192,7 @@ inline void VList<_Ty>::pop_back()
     }
 
     auto node_to_delete = tail_;
-    tail_ = tail_->prev;
+    tail_ = tail_->prev_;
     delete node_to_delete;
     node_to_delete = nullptr;
     tail_->next = head_;
