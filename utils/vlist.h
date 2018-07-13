@@ -97,8 +97,8 @@ public:
 
     // TODO ²âÊÔ´úÂë
 public:
-    VListNode<_Ty> * head_;
-    VListNode<_Ty> * tail_;
+    VListNode * head_;
+    VListNode * tail_;
     size_t size_;
 };
 
