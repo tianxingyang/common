@@ -71,7 +71,8 @@ public:
     public:
         _Ty & operator*()
         {
-            return this->_Retrive();
+            using VConstListIterator::_Retrive;
+            return _Retrive();
         }
 
     protected:

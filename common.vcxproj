@@ -106,10 +106,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="notes.md" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CMakefile.txt" />
+    <Text Include="CMakeLists.txt" />
     <Text Include="test\CMakefile.txt" />
+    <Text Include="test\CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

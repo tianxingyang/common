@@ -8,8 +8,8 @@ TEST(VListTest, ConstructorTest)
 {
     VList<int> v_list;
     VList<int> v_list_1(10);
-    EXPECT_EQ(v_list_1.head_->data, 10);
-    EXPECT_EQ(v_list.head_->next, nullptr);
+    EXPECT_EQ(v_list_1.head_->data_, 10);
+    EXPECT_EQ(v_list.head_->next_, nullptr);
 }
 
 TEST(VListTest, IteratorTest)
