@@ -200,7 +200,7 @@ inline void VList<_Ty>::pop_back()
     tail_ = tail_->prev_;
     delete node_to_delete;
     node_to_delete = nullptr;
-    tail_->next = head_;
+    tail_->next_ = head_;
 
     --size_;
 }
@@ -213,11 +213,11 @@ inline void VList<_Ty>::pop_front()
         throw std::out_of_range("list is empty");
     }
 
-    auto node_to_delete = head_->next;
-    head_->next = head_->next->next;
+    auto node_to_delete = head_->next_;
+    head_->next_ = head_->next_->next;
     delete node_to_delete;
     node_to_delete = nullptr;
-    head_->next->prev = head_;
+    head_->next_->prev = head_;
 
     --size_;
 }
