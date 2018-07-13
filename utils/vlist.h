@@ -65,11 +65,13 @@ public:
     class VListIterator : public VConstListIterator
     {
         friend class VList<_Ty>;
+    public:
+        VListIterator() : VConstListIterator() {}
 
     public:
         _Ty & operator*()
         {
-            return _Retrive();
+            return this->_Retrive();
         }
 
     protected:
