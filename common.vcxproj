@@ -68,15 +68,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>$(ProjectDir)libs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\MinGW\include;$(ProjectDir)utils;$(ProjectDir)libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>D:\Users\vito\Source\Repos\common\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="test\vlist_test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libs\google\glog\logging.h" />
+    <ClInclude Include="libs\google\glog\log_severity.h" />
+    <ClInclude Include="libs\google\glog\raw_logging.h" />
+    <ClInclude Include="libs\google\glog\stl_logging.h" />
+    <ClInclude Include="libs\google\glog\vlog_is_on.h" />
     <ClInclude Include="libs\google\gtest\gtest-death-test.h" />
     <ClInclude Include="libs\google\gtest\gtest-message.h" />
     <ClInclude Include="libs\google\gtest\gtest-param-test.h" />
@@ -112,6 +123,12 @@
     <Text Include="CMakeLists.txt" />
     <Text Include="test\CMakefile.txt" />
     <Text Include="test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libs\glogd.lib" />
+    <Library Include="libs\libglog.a" />
+    <Library Include="libs\libgtest.a" />
+    <Library Include="libs\libgtest_main.a" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

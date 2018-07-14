@@ -1,6 +1,8 @@
 #ifndef V_LIST_H_
 #define V_LIST_H_
 
+#include <google/glog/logging.h>
+
 namespace vcommon
 {
 template <typename _Ty>
@@ -9,7 +11,7 @@ class VList
     struct VListNode
     {
         VListNode() : next_(nullptr), prev_(nullptr) {}
-        VListNode(const _Ty & data, VListNode * next = nullptr, VListNode * prev = nullptr);
+        explicit VListNode(const _Ty & data, VListNode * next = nullptr, VListNode * prev = nullptr);
         VListNode * next_;
         VListNode * prev_;
         _Ty data_;
@@ -162,6 +164,7 @@ inline typename VList<_Ty>::VListIterator VList<_Ty>::end()
 template<typename _Ty>
 inline void VList<_Ty>::push_back(const _Ty& data)
 {
+    LOG(INFO) << "data: " << data;
     VListNode * node_tmp = new VListNode;
     memcpy(&(node_tmp->data_), &data, sizeof(_Ty));
 
