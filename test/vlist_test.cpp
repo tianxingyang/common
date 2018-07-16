@@ -1,4 +1,5 @@
 #include <google/gtest/gtest.h>
+#include <easyloggingpp/easylogging++.h>
 
 #include "vlist.h"
 
@@ -22,6 +23,7 @@ TEST(VListTest, IteratorTest)
 int main(int argc, char* argv[])
 {
     testing::InitGoogleTest(&argc, argv);
+    el::Loggers::configureFromGlobal("global.conf");
 
     return RUN_ALL_TESTS();
 }
