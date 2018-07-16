@@ -1,7 +1,7 @@
 #ifndef V_LIST_H_
 #define V_LIST_H_
 
-#include <google/glog/logging.h>
+#include <easyloggingpp/easylogging++.h>
 
 namespace vcommon
 {

@@ -80,9 +80,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\easyloggingpp\easylogging++.cc" />
     <ClCompile Include="test\vlist_test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libs\easyloggingpp\easylogging++.h" />
     <ClInclude Include="libs\google\glog\logging.h" />
     <ClInclude Include="libs\google\glog\log_severity.h" />
     <ClInclude Include="libs\google\glog\raw_logging.h" />
