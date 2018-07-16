@@ -3,6 +3,8 @@
 
 #include <easyloggingpp/easylogging++.h>
 
+INITIALIZE_EASYLOGGINGPP
+
 namespace vcommon
 {
 template <typename _Ty>
