@@ -5,6 +5,8 @@
 
 using namespace vcommon;
 
+INITIALIZE_EASYLOGGINGPP
+
 TEST(VListTest, ConstructorTest)
 {
     VList<int> v_list;
