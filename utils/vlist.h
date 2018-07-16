@@ -1,10 +1,6 @@
 #ifndef V_LIST_H_
 #define V_LIST_H_
 
-#include <easyloggingpp/easylogging++.h>
-
-INITIALIZE_EASYLOGGINGPP
-
 namespace vcommon
 {
 template <typename _Ty>
@@ -166,7 +162,6 @@ inline typename VList<_Ty>::VListIterator VList<_Ty>::end()
 template<typename _Ty>
 inline void VList<_Ty>::push_back(const _Ty& data)
 {
-    LOG(INFO) << "data: " << data;
     VListNode * node_tmp = new VListNode;
     memcpy(&(node_tmp->data_), &data, sizeof(_Ty));
 

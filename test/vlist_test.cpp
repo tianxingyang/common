@@ -18,3 +18,10 @@ TEST(VListTest, IteratorTest)
     EXPECT_EQ(*(v_list.begin()), 10);
     EXPECT_EQ(*(v_list.end()), 10);
 }
+
+int main(int argc, char* argv[])
+{
+    testing::InitGoogleTest(&argc, argv);
+
+    return RUN_ALL_TESTS();
+}
