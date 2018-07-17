@@ -1,5 +1,4 @@
-#ifndef V_LIST_H_
-#define V_LIST_H_
+#pragma once
 
 namespace vcommon
 {
@@ -9,7 +8,7 @@ class VList
     struct VListNode
     {
         VListNode() : next_(nullptr), prev_(nullptr) {}
-        explicit VListNode(const _Ty & data, VListNode * next = nullptr, VListNode * prev = nullptr);
+        explicit VListNode(const _Ty & data = _Ty(), VListNode * prev = nullptr, VListNode * next = nullptr);
         VListNode * next_;
         VListNode * prev_;
         _Ty data_;
@@ -91,6 +90,8 @@ public:
 public:
     VListIterator begin();
     VListIterator end();
+    VConstListIterator cbegin();
+    VConstListIterator cend();
 
 public:
     void push_back(const _Ty& data);
@@ -100,12 +101,17 @@ public:
     void clear();
     bool empty() { return size_ == 0; }
 
-    // TODO ≤‚ ‘¥˙¬Î
-public:
+private:
     VListNode * head_;
     VListNode * tail_;
     size_t size_;
 };
+
+template<typename _Ty>
+inline VList<_Ty>::VListNode::VListNode(const _Ty & data, VListNode * prev, VListNode * next)
+    : next_(next), prev_(prev), data_(data)
+{
+}
 
 template <typename _Ty>
 VList<_Ty>::VConstListIterator::VConstListIterator(VListNode* node) : current_(node)
@@ -113,13 +119,18 @@ VList<_Ty>::VConstListIterator::VConstListIterator(VListNode* node) : current_(n
 }
 
 template<typename _Ty>
-inline VList<_Ty>::VList() : head_(new VListNode), tail_(head_), size_(0)
+inline VList<_Ty>::VList() : head_(new VListNode), tail_(new VListNode), size_(0)
 {
+    head_->next_ = tail_;
+    tail_->prev_ = head_;
 }
 
 template<typename _Ty>
-inline VList<_Ty>::VList(const _Ty & element) : head_(new VListNode), tail_(head_), size_(0)
+inline VList<_Ty>::VList(const _Ty & element) : head_(new VListNode), tail_(new VListNode), size_(0)
 {
+    head_->next_ = tail_;
+    tail_->prev_ = head_;
+
     push_back(element);
 }
 
@@ -160,16 +171,24 @@ inline typename VList<_Ty>::VListIterator VList<_Ty>::end()
 }
 
 template<typename _Ty>
+inline typename VList<_Ty>::VConstListIterator VList<_Ty>::cbegin()
+{
+    return VConstListIterator(head_->next_);
+}
+
+template<typename _Ty>
+inline typename VList<_Ty>::VConstListIterator VList<_Ty>::cend()
+{
+    return VConstListIterator(tail_);
+}
+
+template<typename _Ty>
 inline void VList<_Ty>::push_back(const _Ty& data)
 {
-    VListNode * node_tmp = new VListNode;
-    memcpy(&(node_tmp->data_), &data, sizeof(_Ty));
+    VListNode * node_tmp = new VListNode(data, tail_->prev, tail_);
 
-    tail_->next_ = node_tmp;
-    node_tmp->prev_ = tail_;
-    node_tmp->next_ = head_;
-
-    tail_ = node_tmp;
+    tail_->prev_->next_ = node_tmp;
+    tail_->prev_ = node_tmp;
 
     ++size_;
 }
@@ -178,7 +197,7 @@ template<typename _Ty>
 inline void VList<_Ty>::push_front(const _Ty& data)
 {
     VListNode * node_tmp = new VListNode;
-    memcpy(&(node_tmp->data_), &data, sizeof(_Ty));
+    node_tmp->data_ = data;
 
     head_->next_->prev_ = node_tmp;
     node_tmp->next_ = head_->next_->next_;
@@ -230,12 +249,4 @@ inline void VList<_Ty>::clear()
         pop_back();
     }
 }
-
-template<typename _Ty>
-inline VList<_Ty>::VListNode::VListNode(const _Ty & data, VListNode * next, VListNode * prev)
-    : next_(next), prev_(prev), data_(data)
-{
 }
-}
-
-#endif // V_LIST_H_
