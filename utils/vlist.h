@@ -7,7 +7,6 @@ class VList
 {
     struct VListNode
     {
-        VListNode() : next_(nullptr), prev_(nullptr) {}
         explicit VListNode(const _Ty & data = _Ty(), VListNode * prev = nullptr, VListNode * next = nullptr);
         VListNode * next_;
         VListNode * prev_;
