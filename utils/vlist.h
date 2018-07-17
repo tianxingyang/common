@@ -90,8 +90,10 @@ public:
 public:
     VListIterator begin();
     VListIterator end();
-    VConstListIterator cbegin();
-    VConstListIterator cend();
+    VConstListIterator cbegin() const;
+    VConstListIterator cend() const;
+    VListIterator append(const _Ty& data, VListIterator *it);
+    VListIterator prepend(const _Ty& data, VListIterator * it);
 
 public:
     void push_back(const _Ty& data);
@@ -138,8 +140,8 @@ template<typename _Ty>
 inline VList<_Ty>::VList(const VList<_Ty>& rhs)
 {
     clear();
-    auto it = rhs.begin();
-    while (it != rhs.end())
+    auto it = rhs.cbegin();
+    while (it != rhs.cend())
     {
         this->push_back(*it);
     }
@@ -171,21 +173,39 @@ inline typename VList<_Ty>::VListIterator VList<_Ty>::end()
 }
 
 template<typename _Ty>
-inline typename VList<_Ty>::VConstListIterator VList<_Ty>::cbegin()
+inline typename VList<_Ty>::VConstListIterator VList<_Ty>::cbegin() const
 {
     return VConstListIterator(head_->next_);
 }
 
 template<typename _Ty>
-inline typename VList<_Ty>::VConstListIterator VList<_Ty>::cend()
+inline typename VList<_Ty>::VConstListIterator VList<_Ty>::cend() const
 {
     return VConstListIterator(tail_);
 }
 
 template<typename _Ty>
+inline typename VList<_Ty>::VListIterator VList<_Ty>::append(const _Ty& data, VListIterator * it)
+{
+    auto node = it->current_;
+    ++size_;
+
+    return VListIterator(node->next_ = node->next_->prev_ = new VListNode(data, node, node->next_));
+}
+
+template<typename _Ty>
+inline typename VList<_Ty>::VListIterator VList<_Ty>::prepend(const _Ty& data, VListIterator * it)
+{
+    auto node = it->current_;
+    ++size_;
+
+    return VListIterator(node->prev_ = node->prev_->next_ = new VListNode(data, node->prev_, node));
+}
+
+template<typename _Ty>
 inline void VList<_Ty>::push_back(const _Ty& data)
 {
-    VListNode * node_tmp = new VListNode(data, tail_->prev, tail_);
+    VListNode * node_tmp = new VListNode(data, tail_->prev_, tail_);
 
     tail_->prev_->next_ = node_tmp;
     tail_->prev_ = node_tmp;
@@ -196,12 +216,9 @@ inline void VList<_Ty>::push_back(const _Ty& data)
 template<typename _Ty>
 inline void VList<_Ty>::push_front(const _Ty& data)
 {
-    VListNode * node_tmp = new VListNode;
-    node_tmp->data_ = data;
+    VListNode * node_tmp = new VListNode(data, head_, head_->next_);
 
     head_->next_->prev_ = node_tmp;
-    node_tmp->next_ = head_->next_->next_;
-    node_tmp->prev_ = head_;
     head_->next_ = node_tmp;
 
     ++size_;
@@ -233,10 +250,10 @@ inline void VList<_Ty>::pop_front()
     }
 
     auto node_to_delete = head_->next_;
-    head_->next_ = head_->next_->next;
+    head_->next_ = head_->next_->next_;
     delete node_to_delete;
     node_to_delete = nullptr;
-    head_->next_->prev = head_;
+    head_->next_->prev_ = head_;
 
     --size_;
 }
