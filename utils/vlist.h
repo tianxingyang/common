@@ -103,7 +103,8 @@ public:
     void clear();
     bool empty() { return size_ == 0; }
 
-private:
+    //todo
+public:
     VListNode * head_;
     VListNode * tail_;
     size_t size_;
