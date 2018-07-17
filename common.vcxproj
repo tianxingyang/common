@@ -81,7 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="libs\easyloggingpp\easylogging++.cc" />
-    <ClCompile Include="test\vlist_test.cpp" />
+    <ClCompile Include="tests\vlist_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\easyloggingpp\easylogging++.h" />
@@ -115,17 +115,16 @@
     <ClInclude Include="libs\google\gtest\internal\gtest-tuple.h" />
     <ClInclude Include="libs\google\gtest\internal\gtest-type-util.h" />
     <ClInclude Include="utils\vlist.h" />
-    <ClInclude Include="utils\vqueue.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="notes.md" />
-    <None Include="test\global.conf" />
+    <None Include="tests\global.conf" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
     <Text Include="test\CMakefile.txt" />
-    <Text Include="test\CMakeLists.txt" />
+    <Text Include="tests\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="libs\glogd.lib" />
