@@ -13,6 +13,8 @@ TEST(VListTest, ConstructorTest)
     VList<int> v_list_1(10);
     EXPECT_EQ(v_list_1.head_->next_->data_, 10);
     EXPECT_EQ(v_list.head_->next_, nullptr);
+    EXPECT_EQ(v_list_1.tail_->next_->data_, 10);
+    EXPECT_EQ(v_list_1.tail_->next_, nullptr);
 }
 
 TEST(VListTest, IteratorTest)
