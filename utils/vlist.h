@@ -121,14 +121,14 @@ VList<_Ty>::VConstListIterator::VConstListIterator(VListNode* node) : current_(n
 }
 
 template<typename _Ty>
-inline VList<_Ty>::VList() : head_(new VListNode), tail_(new VListNode), size_(0)
+inline VList<_Ty>::VList() : head_(new VListNode()), tail_(new VListNode()), size_(0)
 {
     head_->next_ = tail_;
     tail_->prev_ = head_;
 }
 
 template<typename _Ty>
-inline VList<_Ty>::VList(const _Ty & element) : head_(new VListNode), tail_(new VListNode), size_(0)
+inline VList<_Ty>::VList(const _Ty & element) : head_(new VListNode()), tail_(new VListNode()), size_(0)
 {
     head_->next_ = tail_;
     tail_->prev_ = head_;
