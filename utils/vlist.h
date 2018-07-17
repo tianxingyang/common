@@ -1,6 +1,8 @@
 #ifndef V_LIST_H_
 #define V_LIST_H_
 
+#include <easyloggingpp/easylogging++.h>
+
 namespace vcommon
 {
 template <typename _Ty>
