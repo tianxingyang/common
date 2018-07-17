@@ -5,7 +5,7 @@
 
 using namespace vcommon;
 
-//INITIALIZE_EASYLOGGINGPP
+INITIALIZE_EASYLOGGINGPP
 
 //TEST(VListTest, ConstructorTest)
 //{
