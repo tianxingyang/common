@@ -95,7 +95,7 @@ static const char* kDefaultLogFile = "nul";
 #elif defined(ELPP_DEFAULT_LOG_FILE)
 static const char* kDefaultLogFile = ELPP_DEFAULT_LOG_FILE;
 #else
-static const char* kDefaultLogFile = "log/log_%datetime{%Y%M%d}";
+static const char* kDefaultLogFile = "log/log_%datetime{%Y%M%d}.log";
 #endif // defined(ELPP_NO_DEFAULT_LOG_FILE)
 
 #if !defined(ELPP_DISABLE_LOG_FILE_FROM_ARG)
