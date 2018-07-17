@@ -26,7 +26,8 @@ TEST(VListTest, IteratorTest)
 int main(int argc, char* argv[])
 {
     testing::InitGoogleTest(&argc, argv);
-    el::Loggers::configureFromGlobal("global.conf");
+    const el::Configurations conf("global.conf");
+    el::Loggers::reconfigureAllLoggers(conf);
 
     return RUN_ALL_TESTS();
 }

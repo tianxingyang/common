@@ -120,6 +120,7 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="notes.md" />
+    <None Include="test\global.conf" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
