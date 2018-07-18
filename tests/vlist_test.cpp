@@ -23,7 +23,7 @@ TEST(VListTest, IteratorTest)
     EXPECT_EQ(*(v_list.begin()), 10);
 }
 
-TEST(VListTestm, PushBackTest)
+TEST(VListTest, PushBackTest)
 {
     VList<int> v_list(1);
     v_list.push_back(2);
