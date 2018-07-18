@@ -19,7 +19,6 @@ TEST(VListTest, IteratorTest)
 {
     VList<int> v_list(10);
     EXPECT_EQ(*(v_list.begin()), 10);
-    EXPECT_EQ(*(v_list.end()), 10);
 }
 
 int main(int argc, char* argv[])
