@@ -102,8 +102,9 @@ public:
     void clear();
     bool empty() { return size_ == 0; }
 
-    //todo
 public:
+    //head_和tail_都是list外的节点
+    //head_.next_指向首元素，tail_.prev_指向尾元素
     VListNode * head_;
     VListNode * tail_;
     size_t size_;
@@ -190,7 +191,11 @@ inline typename VList<_Ty>::VListIterator VList<_Ty>::append(const _Ty& data, VL
     auto node = it->current_;
     ++size_;
 
-    return VListIterator(node->next_ = node->next_->prev_ = new VListNode(data, node, node->next_));
+    auto new_node = new VListNode(data, node, node->next_);
+    node->next_->prev_ = new_node;
+    node->next_ = new_node;
+
+    return VListIterator(new_node);
 }
 
 template<typename _Ty>
@@ -199,29 +204,25 @@ inline typename VList<_Ty>::VListIterator VList<_Ty>::prepend(const _Ty& data, V
     auto node = it->current_;
     ++size_;
 
-    return VListIterator(node->prev_ = node->prev_->next_ = new VListNode(data, node->prev_, node));
+    auto new_node = new VListNode(data, node->prev_, node);
+    node->prev_->next_ = new_node;
+    node->prev_ = new_node;
+
+    return VListIterator(new_node);
 }
 
 template<typename _Ty>
 inline void VList<_Ty>::push_back(const _Ty& data)
 {
-    VListNode * node_tmp = new VListNode(data, tail_->prev_, tail_);
-
-    tail_->prev_->next_ = node_tmp;
-    tail_->prev_ = node_tmp;
-
-    ++size_;
+    auto tail_pointer = end();
+    prepend(data, &tail_pointer);
 }
 
 template<typename _Ty>
 inline void VList<_Ty>::push_front(const _Ty& data)
 {
-    VListNode * node_tmp = new VListNode(data, head_, head_->next_);
-
-    head_->next_->prev_ = node_tmp;
-    head_->next_ = node_tmp;
-
-    ++size_;
+    auto head_pointer = begin();
+    prepend(data, &head_pointer);
 }
 
 template<typename _Ty>
