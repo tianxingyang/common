@@ -69,13 +69,13 @@ public:
     public:
         VListIterator & operator++()
         {
-            current_ = current_->next_;
+            this->current_ = this->current_->next_;
             return *this;
         }
 
         VListIterator & operator--()
         {
-            current_ = current_->prev_;
+            this->current_ = this->current_->prev_;
             return *this;
         }
         _Ty & operator*()
