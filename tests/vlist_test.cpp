@@ -15,7 +15,6 @@ class VListTest : public testing::Test
 protected:
     void SetUp() override
     {
-        l2_ = VList<int>(1);
         l5_.push_back(0);
         l5_.push_back(1);
         l5_.push_back(2);
