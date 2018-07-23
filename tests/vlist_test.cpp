@@ -53,24 +53,6 @@ TEST_F(VListTest, PushFrontTest)
     EXPECT_EQ(*(l2_.begin()), 0);
 }
 
-TEST_F(VListTest, AppendTest)
-{
-    auto old_it = l3_.begin();
-    l3_.append(0, &old_it);
-    ++old_it;
-    EXPECT_EQ(*old_it, 0);
-}
-
-TEST_F(VListTest, PrependTest)
-{
-    auto it = l4_.end();
-    l4_.prepend(0, &it);
-    auto it_head = l4_.begin();
-    EXPECT_EQ(*it_head, 0);
-    --it;
-    EXPECT_EQ(*it, 0);
-}
-
 TEST_F(VListTest, GetTest)
 {
     EXPECT_EQ(*(l5_.get(0)), 0);
