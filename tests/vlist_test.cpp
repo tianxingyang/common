@@ -17,6 +17,8 @@ protected:
     {
         l1_ = VList<int>();
         l2_ = VList<int>(1);
+        l3_ = VList<int>();
+        l4_ = VList<int>();
         l5_.push_back(0);
         l5_.push_back(1);
         l5_.push_back(2);
