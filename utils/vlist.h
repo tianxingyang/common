@@ -273,7 +273,7 @@ inline void VList<_Ty>::pop_front()
 }
 
 template<typename _Ty>
-VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
+inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
 {
     if (size_ == 0)
     {
