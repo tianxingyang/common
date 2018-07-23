@@ -287,7 +287,7 @@ inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
     {
         auto current_index = int(size_ - 1);
         auto it = --end();
-        while (current_index-- != dest_index + 1)
+        while (current_index-- != dest_index)
         {
             --it;
         }
@@ -297,7 +297,7 @@ inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
     {
         auto current_index = 0;
         auto it = begin();
-        while (current_index++ != dest_index - 1)
+        while (current_index++ != dest_index)
         {
             ++it;
         }
