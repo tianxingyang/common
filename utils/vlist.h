@@ -172,7 +172,17 @@ inline VList<_Ty>::~VList()
 template<typename _Ty>
 inline VList<_Ty>& VList<_Ty>::operator=(const VList<_Ty>& rhs)
 {
-    *this = VList<_Ty>(rhs);
+    if (this == &rhs)
+    {
+        return *this;
+    }
+
+    clear();
+    for(auto itr = rhs.cbegin(); itr != rhs.cend(); ++ itr)
+    {
+        push_back(*itr);
+    }
+
     return *this;
 }
 
