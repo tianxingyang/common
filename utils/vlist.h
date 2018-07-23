@@ -280,14 +280,14 @@ inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
         throw std::out_of_range("list is empty");
     }
 
-    if (dest_index > size_ - 1)
+    if (dest_index > int(size_ - 1))
     {
         throw std::out_of_range("out of range");
     }
 
-    if (dest_index > size_ / 2)
+    if (dest_index > int(size_ / 2))
     {
-        auto current_index = size_ - 1;
+        auto current_index = int(size_ - 1);
         auto it = --end();
         while (current_index-- != dest_index + 1)
         {
