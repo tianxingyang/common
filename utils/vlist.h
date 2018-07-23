@@ -22,13 +22,13 @@ public:
         VConstListIterator() : current_(nullptr) {}
         virtual ~VConstListIterator() = default;
 
-        VConstListIterator & operator++()
+        virtual VConstListIterator & operator++()
         {
             current_ = current_->next_;
             return *this;
         }
 
-        VConstListIterator & operator--()
+        virtual VConstListIterator & operator--()
         {
             current_ = current_->prev_;
             return *this;
@@ -67,6 +67,17 @@ public:
         VListIterator() : VConstListIterator() {}
 
     public:
+        VListIterator & operator++()
+        {
+            current_ = current_->next_;
+            return *this;
+        }
+
+        VListIterator & operator--()
+        {
+            current_ = current_->prev_;
+            return *this;
+        }
         _Ty & operator*()
         {
             return this->_Retrive();
@@ -101,7 +112,7 @@ public:
     void push_front(const _Ty& data);
     void pop_back() noexcept(false);
     void pop_front() noexcept(false);
-    _Ty & get(int dest_index) noexcept(false);
+    VListIterator & get(int dest_index) noexcept(false);
     void clear();
     bool empty() { return size_ == 0; }
     size_t size() {return size_; }
@@ -262,7 +273,7 @@ inline void VList<_Ty>::pop_front()
 }
 
 template<typename _Ty>
-_Ty &VList<_Ty>::get(int dest_index)
+VListIterator & VList<_Ty>::get(int dest_index)
 {
     if (size_ == 0)
     {
@@ -282,7 +293,7 @@ _Ty &VList<_Ty>::get(int dest_index)
         {
             --it;
         }
-        return *it;
+        return it;
     }
     else
     {
@@ -292,7 +303,7 @@ _Ty &VList<_Ty>::get(int dest_index)
         {
             ++it;
         }
-        return *it;
+        return it;
     }
 }
 
