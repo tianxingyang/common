@@ -84,6 +84,8 @@ public:
     explicit VList<_Ty>(const _Ty & element);
     VList<_Ty>(const VList<_Ty> & rhs);
     ~VList();
+
+public:
     VList<_Ty> & operator=(const VList<_Ty> & rhs);
 
 public:
@@ -99,10 +101,12 @@ public:
     void push_front(const _Ty& data);
     void pop_back() noexcept(false);
     void pop_front() noexcept(false);
+    _Ty & get(int dest_index) noexcept(false);
     void clear();
     bool empty() { return size_ == 0; }
+    size_t size() {return size_; }
 
-public:
+private:
     //head_和tail_都是list外的节点
     //head_.next_指向首元素，tail_.prev_指向尾元素
     VListNode * head_;
@@ -233,11 +237,10 @@ inline void VList<_Ty>::pop_back()
         throw std::out_of_range("list is empty");
     }
 
-    auto node_to_delete = tail_;
-    tail_ = tail_->prev_;
+    auto node_to_delete = tail_->prev_;
+    tail_->prev_ = tail_->prev_->prev_;
     delete node_to_delete;
-    node_to_delete = nullptr;
-    tail_->next_ = head_;
+    tail_->prev_->next_ = tail_;
 
     --size_;
 }
@@ -253,10 +256,44 @@ inline void VList<_Ty>::pop_front()
     auto node_to_delete = head_->next_;
     head_->next_ = head_->next_->next_;
     delete node_to_delete;
-    node_to_delete = nullptr;
     head_->next_->prev_ = head_;
 
     --size_;
+}
+
+template<typename _Ty>
+_Ty &VList<_Ty>::get(int dest_index)
+{
+    if (size_ == 0)
+    {
+        throw std::out_of_range("list is empty");
+    }
+
+    if (dest_index > size_ - 1)
+    {
+        throw std::out_of_range("out of range");
+    }
+
+    if (dest_index > size_ / 2)
+    {
+        auto current_index = size_ - 1;
+        auto it = --end();
+        while (current_index-- != dest_index + 1)
+        {
+            --it;
+        }
+        return *it;
+    }
+    else
+    {
+        auto current_index = 0;
+        auto it = begin();
+        while (current_index++ != dest_index - 1)
+        {
+            ++it;
+        }
+        return *it;
+    }
 }
 
 template<typename _Ty>
