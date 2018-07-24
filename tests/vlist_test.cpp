@@ -19,6 +19,8 @@ protected:
         l5_.push_back(1);
         l5_.push_back(2);
         l6_ = l5_;
+        l7_ = l6_;
+        l3_ = l5_;
     }
 
     VList<int> l1_;
@@ -75,6 +77,22 @@ TEST_F(VListTest, PopFrontTest)
     l6_.pop_front();
     EXPECT_EQ(l6_.get(0), 1);
     EXPECT_EQ(l6_.size(), 2);
+}
+
+TEST_F(VListTest, EraseAtGivenPositionTest)
+{
+    l7_.erase(l7_.begin());
+    EXPECT_EQ(l7_.get(0), 1);
+    EXPECT_EQ(l7_.size(), 2);
+}
+
+TEST_F(VListTest, EraseAtGivenRangeTest)
+{
+    auto begin = ++l3_.begin();
+    auto end = --l3_.end();
+    l3_.erase(begin, end);
+    EXPECT_EQ(l3_.get(0), 1);
+    EXPECT_EQ(l3_.size(), 1);
 }
 
 int main(int argc, char* argv[])

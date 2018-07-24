@@ -1,5 +1,7 @@
 #pragma once
 
+#include <list>
+
 namespace vcommon
 {
 template <typename _Ty>
@@ -114,6 +116,8 @@ public:
     void clear();
     bool empty() { return size_ == 0; }
     size_t size() {return size_; }
+    VListIterator erase(const VListIterator &position) noexcept(false);
+    VListIterator erase(const VListIterator &from, const VListIterator &to);
 
 private:
     VListIterator insert(const _Ty &data, VListIterator *it);
@@ -312,5 +316,53 @@ inline void VList<_Ty>::clear()
     {
         pop_back();
     }
+}
+
+template<typename _Ty>
+VListIterator VList<_Ty>::erase(const VListIterator &position)
+{
+    if (size_ == 0)
+    {
+        throw std::out_of_range("list is empty");
+    }
+
+    if (position == this->cend())
+    {
+        throw std::out_of_range("cannot erase end()");
+    }
+
+    auto node_to_delete = position.current_;
+    node_to_delete->prev_ = node_to_delete->next_->prev_;
+    node_to_delete->prev_->next_ = node_to_delete->next_;
+    auto node_to_return = node_to_delete->next_;
+
+    delete node_to_delete;
+
+    --size_;
+
+    return VListIterator(node_to_return);
+}
+
+template<typename _Ty>
+VListIterator VList<_Ty>::erase(const VListIterator &from, const VListIterator &to)
+{
+    if (size_ == 0)
+    {
+        throw std::out_of_range("list is empty");
+    }
+
+    if (from == this->cend() || to == this->cend())
+    {
+        throw std::out_of_range("cannot erase end()");
+    }
+
+    auto it = from;
+
+    while (it != to)
+    {
+        it = erase(it);
+    }
+
+    return it;
 }
 }
