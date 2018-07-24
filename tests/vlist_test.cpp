@@ -55,9 +55,9 @@ TEST_F(VListTest, PushFrontTest)
 
 TEST_F(VListTest, GetTest)
 {
-    EXPECT_EQ(*(l5_.get(0)), 0);
-    EXPECT_EQ(*(l5_.get(1)), 1);
-    EXPECT_EQ(*(l5_.get(2)), 2);
+    EXPECT_EQ(l5_.get(0), 0);
+    EXPECT_EQ(l5_.get(1), 1);
+    EXPECT_EQ(l5_.get(2), 2);
 }
 
 //TEST_F(VListTest, AssimentTest)

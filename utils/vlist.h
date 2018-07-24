@@ -34,8 +34,6 @@ public:
             return *this;
         }
 
-        VConstListIterator(const VConstListIterator& rhs);
-
         const _Ty & operator*() const
         {
             return _Retrive();
@@ -67,7 +65,6 @@ public:
         friend class VList<_Ty>;
     public:
         VListIterator() : VConstListIterator() {}
-        VListIterator(const VListIterator & rhs);
 
     public:
         VListIterator & operator++()
@@ -113,7 +110,7 @@ public:
     void push_front(const _Ty& data);
     void pop_back() noexcept(false);
     void pop_front() noexcept(false);
-    VListIterator & get(int dest_index) noexcept(false);
+    _Ty & get(int dest_index) noexcept(false);
     void clear();
     bool empty() { return size_ == 0; }
     size_t size() {return size_; }
@@ -130,12 +127,6 @@ private:
 };
 
 template<typename _Ty>
-inline VList<_Ty>::VListIterator::VListIterator(const VList::VListIterator &rhs)
-{
-    *this->current_ = VListNode(rhs.current_->data_, rhs.current_->prev_, rhs.current_->next_);
-}
-
-template<typename _Ty>
 inline VList<_Ty>::VListNode::VListNode(const _Ty & data, VListNode * prev, VListNode * next)
     : next_(next), prev_(prev), data_(data)
 {
@@ -144,12 +135,6 @@ inline VList<_Ty>::VListNode::VListNode(const _Ty & data, VListNode * prev, VLis
 template <typename _Ty>
 inline  VList<_Ty>::VConstListIterator::VConstListIterator(VListNode* node) : current_(node)
 {
-}
-
-template<typename _Ty>
-inline VList<_Ty>::VConstListIterator::VConstListIterator(const VList::VConstListIterator &rhs)
-{
-    *current_ = VListNode(rhs.current_->data_, rhs.current_->prev_, rhs.current_->next_);
 }
 
 template<typename _Ty>
@@ -286,7 +271,7 @@ inline void VList<_Ty>::pop_front()
 }
 
 template<typename _Ty>
-inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
+inline typename _Ty & VList<_Ty>::get(int dest_index)
 {
     if (size_ == 0)
     {
@@ -306,7 +291,7 @@ inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
         {
             --it;
         }
-        return it;
+        return *it;
     }
     else
     {
@@ -316,7 +301,7 @@ inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
         {
             ++it;
         }
-        return it;
+        return *it;
     }
 }
 
