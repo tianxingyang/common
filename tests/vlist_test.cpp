@@ -64,7 +64,7 @@ TEST_F(VListTest, GetTest)
     auto & elem_1 = l5_.get(1);
     elem_1 = 4;
     auto & elem_2 = l5_.get(1);
-    elem_1 = 5;
+    elem_2 = 5;
     EXPECT_EQ(l5_.get(0), 3);
     EXPECT_EQ(l5_.get(1), 4);
     EXPECT_EQ(l5_.get(2), 5);
