@@ -319,7 +319,7 @@ inline void VList<_Ty>::clear()
 }
 
 template<typename _Ty>
-VListIterator VList<_Ty>::erase(const VListIterator &position)
+inline VList<_Ty>::VListIterator VList<_Ty>::erase(const VListIterator &position)
 {
     if (size_ == 0)
     {
@@ -344,7 +344,7 @@ VListIterator VList<_Ty>::erase(const VListIterator &position)
 }
 
 template<typename _Ty>
-VListIterator VList<_Ty>::erase(const VListIterator &from, const VListIterator &to)
+inline VList<_Ty>::VListIterator VList<_Ty>::erase(const VListIterator &from, const VListIterator &to)
 {
     if (size_ == 0)
     {
