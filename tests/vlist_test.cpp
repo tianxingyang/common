@@ -81,7 +81,9 @@ TEST_F(VListTest, PopFrontTest)
 
 TEST_F(VListTest, EraseAtGivenPositionTest)
 {
+    LOG(INFO) << "l7_.begin(): " << l7_.get(0);
     l7_.erase(l7_.begin());
+    LOG(INFO) << "l7_.begin(): " << l7_.get(0);
     EXPECT_EQ(l7_.get(0), 1);
     EXPECT_EQ(l7_.size(), 2);
 }
