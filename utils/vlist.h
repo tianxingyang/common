@@ -85,6 +85,16 @@ public:
             return this->_Retrive();
         }
 
+        bool operator==(const VListIterator & rhs)
+        {
+            return this->current_ == rhs.current_;
+        }
+
+        bool operator!=(const VListIterator & rhs)
+        {
+            return !(*this == rhs);
+        }
+
     protected:
         explicit VListIterator(VListNode * node) : VConstListIterator(node) {}
     };
@@ -326,7 +336,7 @@ inline typename VList<_Ty>::VListIterator VList<_Ty>::erase(const VListIterator 
         throw std::out_of_range("list is empty");
     }
 
-    if (position == this->cend())
+    if (position == this->end())
     {
         throw std::out_of_range("cannot erase end()");
     }
@@ -351,7 +361,7 @@ inline typename VList<_Ty>::VListIterator VList<_Ty>::erase(const VListIterator 
         throw std::out_of_range("list is empty");
     }
 
-    if (from == this->cend() || to == this->cend())
+    if (from == this->end() || to == this->end())
     {
         throw std::out_of_range("cannot erase end()");
     }
