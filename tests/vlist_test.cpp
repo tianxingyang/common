@@ -81,9 +81,7 @@ TEST_F(VListTest, PopFrontTest)
 
 TEST_F(VListTest, EraseAtGivenPositionTest)
 {
-    LOG(INFO) << "l7_.begin(): " << l7_.get(0);
     l7_.erase(l7_.begin());
-    LOG(INFO) << "l7_.begin(): " << l7_.get(0);
     EXPECT_EQ(l7_.get(0), 1);
     EXPECT_EQ(l7_.size(), 2);
 }
@@ -91,7 +89,9 @@ TEST_F(VListTest, EraseAtGivenPositionTest)
 TEST_F(VListTest, EraseAtGivenRangeTest)
 {
     auto begin = ++l3_.begin();
+    LOG(INFO) << "begin: " << *begin;
     auto end = --l3_.end();
+    LOG(INFO) << "end: " << *end;
     l3_.erase(begin, end);
     EXPECT_EQ(l3_.get(0), 1);
     EXPECT_EQ(l3_.size(), 1);
