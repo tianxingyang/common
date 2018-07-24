@@ -38,7 +38,8 @@ TEST_F(VListTest, DefaultConstructorTest)
 
 TEST_F(VListTest, ConstructorTest)
 {
-    EXPECT_EQ(*(l2_.begin()), 1);
+    auto l2 = VList<int>(1);
+    EXPECT_EQ(*(l2.begin()), 1);
 }
 
 TEST_F(VListTest, PushBackTest)
