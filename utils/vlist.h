@@ -1,5 +1,7 @@
 #pragma once
 
+#include <easyloggingpp/easylogging++.h>
+
 namespace vcommon
 {
 template <typename _Ty>
@@ -34,6 +36,8 @@ public:
             return *this;
         }
 
+        VConstListIterator(const VConstListIterator& rhs);
+
         const _Ty & operator*() const
         {
             return _Retrive();
@@ -65,6 +69,7 @@ public:
         friend class VList<_Ty>;
     public:
         VListIterator() : VConstListIterator() {}
+        VListIterator(const VListIterator & rhs);
 
     public:
         VListIterator & operator++()
@@ -127,14 +132,26 @@ private:
 };
 
 template<typename _Ty>
+inline VList<_Ty>::VListIterator::VListIterator(const VList::VListIterator &rhs)
+{
+    *this->current_ = VListNode(rhs.current_->data_, rhs.current_->prev_, rhs.current_->next_);
+}
+
+template<typename _Ty>
 inline VList<_Ty>::VListNode::VListNode(const _Ty & data, VListNode * prev, VListNode * next)
     : next_(next), prev_(prev), data_(data)
 {
 }
 
 template <typename _Ty>
-VList<_Ty>::VConstListIterator::VConstListIterator(VListNode* node) : current_(node)
+inline  VList<_Ty>::VConstListIterator::VConstListIterator(VListNode* node) : current_(node)
 {
+}
+
+template<typename _Ty>
+inline VList<_Ty>::VConstListIterator::VConstListIterator(const VList::VConstListIterator &rhs)
+{
+    *current_ = VListNode(rhs.current_->data_, rhs.current_->prev_, rhs.current_->next_);
 }
 
 template<typename _Ty>
@@ -289,8 +306,10 @@ inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
         auto it = --end();
         while (current_index-- != dest_index)
         {
+            LOG(INFO) << "it: " << it;
             --it;
         }
+        LOG(INFO) << "it: " << it;
         return it;
     }
     else
@@ -299,8 +318,10 @@ inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
         auto it = begin();
         while (current_index++ != dest_index)
         {
+            LOG(INFO) << "it: " << it;
             ++it;
         }
+        LOG(INFO) << "it: " << it;
         return it;
     }
 }
