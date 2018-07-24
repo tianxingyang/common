@@ -342,9 +342,10 @@ inline typename VList<_Ty>::VListIterator VList<_Ty>::erase(VListIterator positi
     }
 
     auto node_to_delete = position.current_;
-    node_to_delete->prev_ = node_to_delete->next_->prev_;
-    node_to_delete->prev_->next_ = node_to_delete->next_;
     auto node_to_return = node_to_delete->next_;
+
+    node_to_delete->next_->prev_ = node_to_delete->prev_;
+    node_to_delete->next_ = node_to_delete->prev_->next_;
 
     delete node_to_delete;
 
