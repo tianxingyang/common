@@ -126,8 +126,8 @@ public:
     void clear();
     bool empty() { return size_ == 0; }
     size_t size() {return size_; }
-    VListIterator erase(const VListIterator &position) noexcept(false);
-    VListIterator erase(const VListIterator &from, const VListIterator &to);
+    VListIterator erase(VListIterator position) noexcept(false);
+    VListIterator erase(VListIterator from, VListIterator to);
 
 private:
     VListIterator insert(const _Ty &data, VListIterator *it);
@@ -329,7 +329,7 @@ inline void VList<_Ty>::clear()
 }
 
 template<typename _Ty>
-inline typename VList<_Ty>::VListIterator VList<_Ty>::erase(const VListIterator &position)
+inline typename VList<_Ty>::VListIterator VList<_Ty>::erase(VListIterator position)
 {
     if (size_ == 0)
     {
@@ -354,7 +354,7 @@ inline typename VList<_Ty>::VListIterator VList<_Ty>::erase(const VListIterator 
 }
 
 template<typename _Ty>
-inline typename VList<_Ty>::VListIterator VList<_Ty>::erase(const VListIterator &from, const VListIterator &to)
+inline typename VList<_Ty>::VListIterator VList<_Ty>::erase(VListIterator from, VListIterator to)
 {
     if (size_ == 0)
     {
