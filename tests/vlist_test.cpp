@@ -70,20 +70,12 @@ TEST_F(VListTest, GetTest)
     EXPECT_EQ(l5_.get(2), 5);
 }
 
-//TEST_F(VListTest, AssimentTest)
-//{
-//
-//    for (int i = 0; i < l6_.size(); ++i)
-//    {
-//
-//    }
-//    EXPECT_EQ(l5_.begin(), l6_.begin());
-//}
-//
-//TEST_F(VListTest, PopBackTest)
-//{
-//
-//}
+TEST_F(VListTest, PopFrontTest)
+{
+    l6_.pop_front();
+    EXPECT_EQ(l6_.get(0), 1);
+    EXPECT_EQ(l6_.size(), 2);
+}
 
 int main(int argc, char* argv[])
 {
