@@ -271,7 +271,7 @@ inline void VList<_Ty>::pop_front()
 }
 
 template<typename _Ty>
-inline typename _Ty & VList<_Ty>::get(int dest_index)
+inline _Ty & VList<_Ty>::get(int dest_index)
 {
     if (size_ == 0)
     {
