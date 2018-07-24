@@ -1,7 +1,5 @@
 #pragma once
 
-#include <easyloggingpp/easylogging++.h>
-
 namespace vcommon
 {
 template <typename _Ty>
@@ -306,10 +304,8 @@ inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
         auto it = --end();
         while (current_index-- != dest_index)
         {
-            LOG(INFO) << "it: " << it;
             --it;
         }
-        LOG(INFO) << "it: " << it;
         return it;
     }
     else
@@ -318,10 +314,8 @@ inline typename VList<_Ty>::VListIterator & VList<_Ty>::get(int dest_index)
         auto it = begin();
         while (current_index++ != dest_index)
         {
-            LOG(INFO) << "it: " << it;
             ++it;
         }
-        LOG(INFO) << "it: " << it;
         return it;
     }
 }
