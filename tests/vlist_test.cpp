@@ -21,6 +21,7 @@ protected:
         l6_ = l5_;
         l7_ = l6_;
         l3_ = l5_;
+        l4_ = l5_;
     }
 
     VList<int> l1_;
@@ -93,8 +94,15 @@ TEST_F(VListTest, EraseAtGivenRangeTest)
     auto end = --l3_.end();
     LOG(INFO) << "end: " << *end;
     l3_.erase(begin, end);
-    EXPECT_EQ(l3_.get(0), 1);
-    EXPECT_EQ(l3_.size(), 1);
+    EXPECT_EQ(l3_.get(0), 0);
+    EXPECT_EQ(l3_.size(), 2);
+}
+
+TEST_F(VListTest, InsertTest)
+{
+    l4_.insert(l4_.begin(), 10);
+    EXPECT_EQ(l4_.get(0), 10);
+    EXPECT_EQ(l4_.get(1), 0);
 }
 
 int main(int argc, char* argv[])

@@ -2,6 +2,8 @@
 
 #include <list>
 
+std::list<int> l;
+
 namespace vcommon
 {
 template <typename _Ty>
@@ -128,9 +130,7 @@ public:
     size_t size() {return size_; }
     VListIterator erase(VListIterator position) noexcept(false);
     VListIterator erase(VListIterator from, VListIterator to);
-
-private:
-    VListIterator insert(const _Ty &data, VListIterator *it);
+    typename VList<_Ty>::VListIterator insert(VListIterator it, const _Ty &data);
 
 private:
     //head_和tail_都是list外的节点
@@ -226,9 +226,9 @@ inline typename VList<_Ty>::VConstListIterator VList<_Ty>::cend() const
 }
 
 template<typename _Ty>
-inline typename VList<_Ty>::VListIterator VList<_Ty>::insert(const _Ty &data, VListIterator *it)
+inline typename VList<_Ty>::VListIterator VList<_Ty>::insert(VListIterator it, const _Ty &data)
 {
-    auto node = it->current_;
+    auto node = it.current_;
     ++size_;
 
     auto new_node = new VListNode(data, node->prev_, node);
@@ -242,14 +242,14 @@ template<typename _Ty>
 inline void VList<_Ty>::push_back(const _Ty& data)
 {
     auto tail_pointer = end();
-    insert(data, &tail_pointer);
+    insert(tail_pointer, data);
 }
 
 template<typename _Ty>
 inline void VList<_Ty>::push_front(const _Ty& data)
 {
     auto head_pointer = begin();
-    insert(data, &head_pointer);
+    insert(head_pointer, data);
 }
 
 template<typename _Ty>
