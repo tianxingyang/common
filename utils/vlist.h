@@ -292,11 +292,7 @@ inline void VList<_Ty>::remove(const _Ty &data)
     {
         if (it.current_->data_ == data)
         {
-            it = erase(it);
-        }
-        else
-        {
-            ++it;
+            erase(it++);
         }
     }
 }
