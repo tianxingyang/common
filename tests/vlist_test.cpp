@@ -22,6 +22,7 @@ protected:
         l7_ = l6_;
         l3_ = l5_;
         l4_ = l5_;
+        l8_ = l5_;
     }
 
     VList<int> l1_;
@@ -31,6 +32,7 @@ protected:
     VList<int> l5_;
     VList<int> l6_;
     VList<int> l7_;
+    VList<int> l8_;
 };
 
 TEST_F(VListTest, DefaultConstructorTest)
@@ -103,6 +105,19 @@ TEST_F(VListTest, InsertTest)
     l4_.insert(l4_.begin(), 10);
     EXPECT_EQ(l4_.get(0), 10);
     EXPECT_EQ(l4_.get(1), 0);
+}
+
+TEST_F(VListTest, RemoveTest)
+{
+    l8_.push_back(0);
+    l8_.push_back(1);
+    l8_.push_back(4);
+    l8_.remove(0);
+    EXPECT_EQ(l8_.size(), 4);
+    EXPECT_EQ(l8_.get(0), 1);
+    l8_.remove(1);
+    EXPECT_EQ(l8_.size(), 2);
+    EXPECT_EQ(l8_.get(0), 2);
 }
 
 int main(int argc, char* argv[])

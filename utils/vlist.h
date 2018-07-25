@@ -124,13 +124,14 @@ public:
     void push_front(const _Ty& data);
     void pop_back() noexcept(false);
     void pop_front() noexcept(false);
-    _Ty & get(int dest_index) noexcept(false);
+    void remove(const _Ty& data);
     void clear();
     bool empty() { return size_ == 0; }
     size_t size() {return size_; }
+    _Ty & get(int dest_index) noexcept(false);
     VListIterator erase(VListIterator position) noexcept(false);
-    VListIterator erase(VListIterator from, VListIterator to);
-    typename VList<_Ty>::VListIterator insert(VListIterator it, const _Ty &data);
+    VListIterator erase(VListIterator from, VListIterator to) noexcept(false);
+    VListIterator insert(VListIterator it, const _Ty &data);
 
 private:
     //head_和tail_都是list外的节点
@@ -282,6 +283,18 @@ inline void VList<_Ty>::pop_front()
     head_->next_->prev_ = head_;
 
     --size_;
+}
+
+template<typename _Ty>
+inline void VList<_Ty>::remove(const _Ty &data)
+{
+    for (auto it = begin(); it != end(); ++it)
+    {
+        if (it.current_->data_ == data)
+        {
+            erase(it);
+        }
+    }
 }
 
 template<typename _Ty>
