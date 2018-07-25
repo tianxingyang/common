@@ -309,6 +309,10 @@ inline void VList<_Ty>::remove(const _Ty &data)
         {
             erase(it++);
         }
+        else
+        {
+            ++it;
+        }
     }
 }
 
