@@ -32,6 +32,13 @@ public:
             return *this;
         }
 
+        virtual const VConstListIterator operator++(int)
+        {
+            auto ret_it = *this;
+            ++*this;
+            return ret_it;
+        }
+
         virtual VConstListIterator & operator--()
         {
             current_ = current_->prev_;
@@ -71,17 +78,25 @@ public:
         VListIterator() : VConstListIterator() {}
 
     public:
-        VListIterator & operator++()
+        VListIterator & operator++() override
         {
             this->current_ = this->current_->next_;
             return *this;
         }
 
-        VListIterator & operator--()
+        VListIterator & operator--() override
         {
             this->current_ = this->current_->prev_;
             return *this;
         }
+
+        VListIterator operator++(int)
+        {
+            auto ret_it = *this;
+            ++*this;
+            return ret_it;
+        }
+
         _Ty & operator*()
         {
             return this->_Retrive();
