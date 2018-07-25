@@ -288,11 +288,15 @@ inline void VList<_Ty>::pop_front()
 template<typename _Ty>
 inline void VList<_Ty>::remove(const _Ty &data)
 {
-    for (auto it = begin(); it != end(); ++it)
+    for (auto it = begin(); it != end();)
     {
         if (it.current_->data_ == data)
         {
-            erase(it);
+            it = erase(it);
+        }
+        else
+        {
+            ++it;
         }
     }
 }

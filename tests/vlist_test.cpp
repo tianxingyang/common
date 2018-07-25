@@ -92,9 +92,7 @@ TEST_F(VListTest, EraseAtGivenPositionTest)
 TEST_F(VListTest, EraseAtGivenRangeTest)
 {
     auto begin = ++l3_.begin();
-    LOG(INFO) << "begin: " << *begin;
     auto end = --l3_.end();
-    LOG(INFO) << "end: " << *end;
     l3_.erase(begin, end);
     EXPECT_EQ(l3_.get(0), 0);
     EXPECT_EQ(l3_.size(), 2);
