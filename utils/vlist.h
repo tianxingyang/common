@@ -32,7 +32,7 @@ public:
             return *this;
         }
 
-        virtual const VConstListIterator operator++(int)
+        virtual VConstListIterator operator++(int)
         {
             auto ret_it = *this;
             ++*this;
